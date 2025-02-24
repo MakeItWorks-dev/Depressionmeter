@@ -6,7 +6,7 @@
 
 
 <!-- Start -->
-<section class="relative overflow-hidden md:py-36 py-24 bg-slate-50/50 dark:bg-slate-800/20 bg-[url('{{ asset('assets/images/bg1.png') }}')] bg-no-repeat bg-center bg-cover" id="home">
+<section class="relative overflow-hidden md:py-36 py-24 bg-slate-50/50 dark:bg-slate-800/20 bg-[url('{{ asset('assets/images/bg1.png') }}')] bg-no-repeat bg-center bg-cover"">
     <div class="container relative">
         <div class="grid md:grid-cols-2 grid-cols-1 items-center gap-[30px] relative">
             <div class="md:me-6">
@@ -42,7 +42,7 @@
                             <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">Login</button>
                         </form>
                         <p class="text-sm text-gray-600 mt-2">Belum punya akun? 
-                            <a href="{{ route('register') }}" class="text-blue-500 hover:underline">Klik di sini</a>
+                            <a href="{{ route('register') }}" class="text-blue-500 hover:underline">Register di sini</a>
                         </p>
                     </div>
                         
