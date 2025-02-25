@@ -54,6 +54,7 @@
                 <p class="">Sentimen Netral</p>
             </div>
         </div>
+        <p class="text-black text-sm text-center italic mt-4">"Hasil prediksi dari sistem ini tidak selalu 100% akurat. Untuk memastikan diagnosis yang tepat dan perawatan yang sesuai, sebaiknya konsultasikan langsung dengan dokter ahli."</p>
         <button id="closeModal" class="mt-6 bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600">Tutup</button>
     </div>
 </div>
