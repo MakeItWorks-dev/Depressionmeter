@@ -6,25 +6,92 @@
 
 @include('includes.navbar')  
 
-<!-- Start -->
-<section class="relative overflow-hidden md:py-36 py-24 bg-slate-50/50 dark:bg-slate-800/20 bg-[url('{{ asset('assets/images/bg1.png') }}')] bg-no-repeat bg-center bg-cover" id="home">
-    <div class="container relative">
-        <div class="grid md:grid-cols-2 grid-cols-1 items-center gap-[30px] relative">
-            
+<section class="relative overflow-hidden md:py-36 py-24 bg-slate-50/50 dark:bg-slate-800/20 bg-[url('{{ asset('assets/images/bg1.png') }}')] bg-no-repeat bg-center bg-cover">    <div class="p-6">
 
-            <div class="relative">
-                <img src="{{ asset('assets/images/b.png') }}" class="mx-auto w-98 relative z-2" alt="">
-                <div class="overflow-hidden absolute md:w-[500px] md:h-[400px] w-[400px] rotate-12 h-[350px] bg-gradient-to-tl to-red-500/20 via-red-500/70 from-red-500 bottom-1/2 translate-y-1/2 md:start-0 start-1/2 ltr:md:translate-x-0 ltr:-translate-x-1/2 rtl:md:translate-x-0 rtl:translate-x-1/2 z-1 shadow-md shadow-red-500/10 rounded-[60%]"></div>
+    <div class="p-6">
+        <div class="grid grid-cols-12 gap-6">
 
-                <div class="overflow-hidden after:content-[''] after:absolute after:size-16 after:bg-red-500/20 after:top-0 after:end-6 after:z-1 after:rounded-lg after:animate-[spin_10s_linear_infinite]"></div>
+            <div class="col-span-12 md:col-span-3">
+                <div class="p-4 rounded-lg ">
+                    <h2 class="text-4xl font-extrabold text-white mb-4">Profile</h2>
+                    <div class="mt-2">
+                        <p class="text-white">Nama</p>
+                        <p class="text-lg text-white font-semibold">{{ Auth::user()->name }}</p>
+                    </div>
+                    <div class="mt-2">
+                        <p class="text-white">Email</p>
+                        <p class="text-lg text-white font-semibold">{{ Auth::user()->email }}</p>
+                    </div>
+                </div>
             </div>
+    
+            <div class="col-span-12 md:col-span-9">
+                <div class="p-6 rounded-lg ">
+                    <h2 class="text-4xl font-extrabold text-white mb-4">Riwayat Analisa</h2>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full rounded-lg border-collapse">
+                            <thead>
+                                <tr class="border-white text-white uppercase text-sm leading-normal">
+                                    <th class="py-3 px-6 text-center font-bold border-b border-white ">No</th>
+                                    <th class="py-3 px-6 text-center font-bold border-l border-white">Tanggal Hasil</th>
+                                    <th class="py-3 px-6 text-center font-bold border-l border-white">Hasil</th>
+                                    <th class="py-3 px-6 text-center font-bold border-l border-white">Positif</th>
+                                    <th class="py-3 px-6 text-center font-bold border-l border-white">Negatif</th>
+                                    <th class="py-3 px-6 text-center font-bold border-l border-b border-white">Netral</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center text-sm text-white">
+                                <tr class="hover:bg-gray-700">
+                                    <td class="py-3 px-6 border-b border-white">1</td>
+                                    <td class="py-3 px-6 border border-white">2 Februari 2025</td>
+                                    <td class="py-3 px-6 border border-white">80% Depresi</td>
+                                    <td class="py-3 px-6 border border-white">80</td>
+                                    <td class="py-3 px-6 border border-white">10</td>
+                                    <td class="py-3 px-6 border-b border-white">10</td>
+                                </tr>
+                                <tr class="hover:bg-gray-700">
+                                    <td class="py-3 px-6 border-b border-white">1</td>
+                                    <td class="py-3 px-6 border border-white">2 Februari 2025</td>
+                                    <td class="py-3 px-6 border border-white">80% Depresi</td>
+                                    <td class="py-3 px-6 border border-white">80</td>
+                                    <td class="py-3 px-6 border border-white">10</td>
+                                    <td class="py-3 px-6 border-b border-white">10</td>
+                                </tr>
+                                <tr class="hover:bg-gray-700">
+                                    <td class="py-3 px-6 border-b border-white">1</td>
+                                    <td class="py-3 px-6 border border-white">2 Februari 2025</td>
+                                    <td class="py-3 px-6 border border-white">80% Depresi</td>
+                                    <td class="py-3 px-6 border border-white">80</td>
+                                    <td class="py-3 px-6 border border-white">10</td>
+                                    <td class="py-3 px-6 border-b border-white">10</td>
+                                </tr>
+                                <tr class="hover:bg-gray-700">
+                                    <td class="py-3 px-6 border-b border-white">1</td>
+                                    <td class="py-3 px-6 border border-white">2 Februari 2025</td>
+                                    <td class="py-3 px-6 border border-white">80% Depresi</td>
+                                    <td class="py-3 px-6 border border-white">80</td>
+                                    <td class="py-3 px-6 border border-white">10</td>
+                                    <td class="py-3 px-6 border-b border-white">10</td>
+                                </tr>
+                                <tr class="hover:bg-gray-700">
+                                    <td class="py-3 px-6 border-b border-white">1</td>
+                                    <td class="py-3 px-6 border border-white">2 Februari 2025</td>
+                                    <td class="py-3 px-6 border border-white">80% Depresi</td>
+                                    <td class="py-3 px-6 border border-white">80</td>
+                                    <td class="py-3 px-6 border border-white">10</td>
+                                    <td class="py-3 px-6 border-b border-white">10</td>
+                                </tr>
+                                
+                                  
+                            </tbody>
+                        </table>                       
+                    </div>
+                </div>
             </div>
+    
         </div>
     </div>
+    
 </section>
-<!-- End -->
-
-
-
 
 @endsection

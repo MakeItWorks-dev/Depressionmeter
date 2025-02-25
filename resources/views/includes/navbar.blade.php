@@ -5,6 +5,11 @@
             <!-- Navbar Button -->
             <ul class="list-none menu-social mb-0 flex items-center space-x-3">
                 <li>
+                    <a href="{{ route(name: 'index') }}" class="size-8 flex items-center justify-center rounded-full bg-red-500/10 hover:bg-red-500 text-red-500 hover:text-white">
+                        <i data-feather="home" class="size-4"></i>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route(name: 'profile') }}" class="size-8 flex items-center justify-center rounded-full bg-red-500/10 hover:bg-red-500 text-red-500 hover:text-white">
                         <i data-feather="user" class="size-4"></i>
                     </a>
