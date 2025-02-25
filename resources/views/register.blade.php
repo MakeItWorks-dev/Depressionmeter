@@ -33,19 +33,19 @@
                             @csrf
                             <div class="mb-4">
                                 <label for="name" class="block text-white">Nama</label>
-                                <input type="text" name="name" id="name" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300">
+                                <input type="text" name="name" id="name" required class="border border-gray-300 bg-white/30 rounded-lg px-6 py-2 lg:w-96 w-60  focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent">
                             </div>
                             <div class="mb-4">
                                 <label for="email" class="block text-white">Email</label>
-                                <input type="email" name="email" id="email" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300">
+                                <input type="email" name="email" id="email" required class="border border-gray-300 bg-white/30 rounded-lg px-6 py-2 lg:w-96 w-60  focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent">
                             </div>
                             <div class="mb-4">
                                 <label for="password" class="block text-white">Password</label>
-                                <input type="password" name="password" id="password" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300">
+                                <input type="password" name="password" id="password" required class="border border-gray-300 bg-white/30 rounded-lg px-6 py-2 lg:w-96 w-60  focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent">
                             </div>
                             <div class="mb-4">
                                 <label for="password_confirmation" class="block text-white">Konfirmasi Password</label>
-                                <input type="password" name="password_confirmation" id="password_confirmation" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300">
+                                <input type="password" name="password_confirmation" id="password_confirmation" required class="border border-gray-300 bg-white/30 rounded-lg px-6 py-2 lg:w-96 w-60  focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent">
                             </div>
                             <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">Daftar</button>
                         </form>
