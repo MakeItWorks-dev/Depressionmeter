@@ -98,7 +98,7 @@
                             </thead>
                         
                             @php
-                                $totalData = 30;
+                                $totalData = 5;
                                 $perPage = 10;
                                 $totalPages = ceil($totalData / $perPage);
                             @endphp

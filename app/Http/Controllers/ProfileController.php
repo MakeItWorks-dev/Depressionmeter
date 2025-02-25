@@ -22,7 +22,7 @@ class ProfileController extends Controller
         $user = Auth::user();
         $history = [];
 
-        for ($i = 1; $i <= 300; $i++) {
+        for ($i = 1; $i <= 5; $i++) {
             $history[] = [
                 'no' => $i,
                 'tanggal' => '2 Februari 2025',
