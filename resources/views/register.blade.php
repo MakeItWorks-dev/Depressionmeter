@@ -5,7 +5,6 @@
 @section('content')
 
 
-<!-- Start -->
 <section class="relative overflow-hidden md:py-36 py-24 bg-slate-50/50 dark:bg-slate-800/20 bg-[url('{{ asset('assets/images/bg1.png') }}')] bg-no-repeat bg-center bg-cover">
     <div class="container relative">
         <div class="grid md:grid-cols-2 grid-cols-1 items-center gap-[30px] relative">
@@ -63,10 +62,5 @@
         </div>
     </div>
 </section>
-<!-- End -->
-
-
-
-
 
 @endsection

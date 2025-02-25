@@ -68,12 +68,10 @@ class AuthController extends Controller
 
         $user = Auth::user();
 
-        // Cek apakah password lama cocok
         if (!Hash::check($request->current_password, $user->password)) {
             return back()->with('error', 'Current password is incorrect.');
         }
 
-        // Update password
         $user->update([
             'password' => Hash::make($request->new_password),
         ]);

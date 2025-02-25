@@ -1,8 +1,6 @@
-<!-- Navbar Start -->
-<nav class="navbar" id="navbar">
+<nav class="navbar rounded-b-xl" id="navbar">
     <div class="container relative flex flex-wrap items-center justify-between">
         <div class="nav-icons flex items-center lg_992:order-2 md:ms-6">
-            <!-- Navbar Button -->
             <ul class="list-none menu-social mb-0 flex items-center space-x-3">
                 <li>
                     <a href="{{ route('index') }}" 
@@ -27,10 +25,8 @@
             </ul>
         </div>
 
-        <!-- Navbar Manu -->
         <div class="navigation lg_992:order-1 lg_992:flex hidden ms-auto" id="menu-collapse">
             
         </div>
     </div>
 </nav>
-<!-- Navbar End -->

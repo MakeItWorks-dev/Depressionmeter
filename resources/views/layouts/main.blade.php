@@ -13,10 +13,8 @@
         <meta name="email" content="support@shreethemes.in">
         <meta name="version" content="1..0">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <!-- favicon -->
         <link href="{{ asset('assets/images/a.png') }}" rel="shortcut icon">
 
-        <!-- Css -->
         <link href="{{ asset('assets/libs/animate.css/animate.min.css') }}" rel="stylesheet">
         <link href="{{ asset('assets/libs/tobii/css/tobii.min.css') }}" rel="stylesheet">
         <link href="{{ asset('assets/libs/tiny-slider/tiny-slider.css') }}" rel="stylesheet">
@@ -41,12 +39,9 @@
             @yield('content')
         </div>
 
-        <!-- includes/footer.blade.php -->
         @include('includes.footer')
 
-        <!-- Back to top -->
         <a href="#" onclick="topFunction()" id="back-to-top" class="back-to-top fixed hidden text-lg rounded-full z-10 bottom-5 end-5 h-9 w-9 text-center bg-red-500 text-white leading-9"><i class="mdi mdi-arrow-up"></i></a>
-        <!-- Back to top -->
 
         {{-- <!-- Switcher -->
         <div class="fixed top-1/4 -right-2 z-3">
@@ -70,7 +65,6 @@
         </div>
         <!-- LTR & RTL Mode Code --> --}}
 
-        <!-- JAVASCRIPTS -->
         <script src="{{ asset('assets/libs/wow.js/wow.min.js') }}"></script>
         <script src="{{ asset('assets/libs/feather-icons/feather.min.js') }}"></script>
         <script src="{{ asset('assets/libs/gumshoejs/gumshoe.polyfills.min.js') }}"></script>
@@ -78,6 +72,5 @@
         <script src="{{ asset('assets/libs/tiny-slider/min/tiny-slider.js') }}"></script>
         <script src="{{ asset('assets/js/plugins.init.js') }}"></script>
         <script src="{{ asset('assets/js/app.js') }}"></script>
-        <!-- JAVASCRIPTS -->
     </body>
 </html>

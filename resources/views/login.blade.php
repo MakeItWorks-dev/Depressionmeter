@@ -4,8 +4,6 @@
 
 @section('content')
 
-
-<!-- Start -->
 <section class="relative overflow-hidden md:py-36 py-24 bg-slate-50/50 dark:bg-slate-800/20 bg-[url('{{ asset('assets/images/bg1.png') }}')] bg-no-repeat bg-center bg-cover"">
     <div class="container relative">
         <div class="grid md:grid-cols-2 grid-cols-1 items-center gap-[30px] relative">
@@ -16,7 +14,6 @@
                     
                 </div>
             </div>
-
             <div class="relative">
                     <div class="w-full max-w-md  p-8 rounded-lg ">
                         <h2 class="text-2xl font-bold text-center mb-6">Login</h2>
@@ -45,20 +42,10 @@
                             <a href="{{ route('register') }}" class="text-blue-500 hover:underline">Register di sini</a>
                         </p>
                     </div>
-                        
-                    
-                    
-
                 <div class="overflow-hidden after:content-[''] after:absolute after:size-16 after:bg-red-500/20 after:top-0 after:end-6 after:z-1 after:rounded-lg after:animate-[spin_10s_linear_infinite]"></div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!-- End -->
-
-
-
-
-
 @endsection

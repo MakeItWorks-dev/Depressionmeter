@@ -24,7 +24,7 @@
                     </div>
                 </div>
 
-                <div class="max-w-lg mx-auto mt-10 bg-gray-700/50 p-6 rounded-lg shadow-md">
+                <div class="max-w-lg mx-auto mt-7 bg-gray-700/50 p-6 rounded-lg shadow-md">
                     <h2 class="text-3xl font-extrabold text-white mb-4">Change Password</h2>
                 
                     @if(session('success'))
@@ -82,7 +82,7 @@
                         <table class="min-w-full rounded-lg border-collapse">
                             <thead>
                                 <tr class="border-white text-white uppercase text-sm leading-normal">
-                                    <th class="py-3 px-6 text-center font-bold border-b border-white ">No</th>
+                                    <th class="py-3 px-6 text-center font-bold border-b border-white">No</th>
                                     <th class="py-3 px-6 text-center font-bold border-l border-white">Tanggal Hasil</th>
                                     <th class="py-3 px-6 text-center font-bold border-l border-white">Hasil</th>
                                     <th class="py-3 px-6 text-center font-bold border-l border-white">Positif</th>
@@ -90,19 +90,37 @@
                                     <th class="py-3 px-6 text-center font-bold border-l border-b border-white">Netral</th>
                                 </tr>
                             </thead>
-                            <tbody class="text-center text-sm text-white">
-                                @for ($i = 1; $i <= 26; $i++)
-                                    <tr class="hover:bg-gray-700">
-                                        <td class="py-3 px-6 border-b border-white">{{ $i }}</td>
-                                        <td class="py-3 px-6 border border-white">2 Februari 2025</td>
-                                        <td class="py-3 px-6 border border-white">80% Depresi</td>
-                                        <td class="py-3 px-6 border border-white">80</td>
-                                        <td class="py-3 px-6 border border-white">10</td>
-                                        <td class="py-3 px-6 border-b border-white">10</td>
-                                    </tr>
-                                @endfor
-                            </tbody>
-                        </table>                       
+                        
+                            @php
+                                $totalData = 50;
+                                $perPage = 10;
+                                $totalPages = ceil($totalData / $perPage);
+                            @endphp
+                        
+                            @for ($page = 0; $page < $totalPages; $page++)
+                                <tbody class="text-center text-sm text-white page" data-page="{{ $page }}" style="{{ $page > 0 ? 'display: none;' : '' }}">
+                                    @for ($i = $page * $perPage + 1; $i <= min(($page + 1) * $perPage, $totalData); $i++)
+                                        <tr class="hover:bg-gray-700">
+                                            <td class="py-3 px-6 border-b border-white">{{ $i }}</td>
+                                            <td class="py-3 px-6 border border-white">2 Februari 2025</td>
+                                            <td class="py-3 px-6 border border-white">80% Depresi</td>
+                                            <td class="py-3 px-6 border border-white">80</td>
+                                            <td class="py-3 px-6 border border-white">10</td>
+                                            <td class="py-3 px-6 border-b border-white">10</td>
+                                        </tr>
+                                    @endfor
+                                </tbody>
+                            @endfor
+                        </table>
+                        
+                        <div class="flex justify-center mt-4 space-x-2">
+                            <button id="prev-btn" class="w-8 h-8 rounded-full bg-gray-600 text-white hidden" onclick="prevPage()">‹</button>
+                        
+                            <div id="pagination-container" class="flex space-x-2"></div>
+                        
+                            <button id="next-btn" class="w-8 h-8 rounded-full bg-gray-600 text-white hidden" onclick="nextPage()">›</button>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -112,4 +130,47 @@
     
 </section>
 
+<script>
+    let currentPage = 0;
+    const totalPages = {{ $totalPages }};
+    const maxVisibleButtons = 9;
+
+    function renderPagination() {
+        let container = document.getElementById("pagination-container");
+        container.innerHTML = "";
+
+        let startPage = Math.max(0, Math.min(currentPage - 4, totalPages - maxVisibleButtons));
+        let endPage = Math.min(totalPages, startPage + maxVisibleButtons);
+
+        for (let i = startPage; i < endPage; i++) {
+            let btn = document.createElement("button");
+            btn.className = "pagination-btn w-8 h-8 rounded-full bg-gray-600 text-white";
+            btn.textContent = i + 1;
+            btn.onclick = () => changePage(i);
+            if (i === currentPage) btn.classList.add("bg-gray-900");
+            container.appendChild(btn);
+        }
+
+        document.getElementById("prev-btn").style.display = currentPage > 0 ? "block" : "none";
+        document.getElementById("next-btn").style.display = currentPage < totalPages - 1 ? "block" : "none";
+    }
+
+    function changePage(page) {
+        document.querySelectorAll('.page').forEach(tbody => {
+            tbody.style.display = tbody.getAttribute('data-page') == page ? '' : 'none';
+        });
+        currentPage = page;
+        renderPagination();
+    }
+
+    function prevPage() {
+        if (currentPage > 0) changePage(currentPage - 1);
+    }
+
+    function nextPage() {
+        if (currentPage < totalPages - 1) changePage(currentPage + 1);
+    }
+
+    renderPagination();
+</script>
 @endsection

@@ -6,7 +6,6 @@
 
 @include('includes.navbar')  
 
-<!-- Start -->
 <section class="relative overflow-hidden md:py-36 py-24 bg-slate-50/50 dark:bg-slate-800/20 bg-[url('{{ asset('assets/images/bg1.png') }}')] bg-no-repeat bg-center bg-cover" id="home">
     <div class="container relative">
         <div class="grid md:grid-cols-2 grid-cols-1 items-center gap-[30px] relative">
@@ -18,8 +17,8 @@
                 <div class="mt-6 flex items-center space-x-2">
                     <form action="">
                         @csrf
-                        <input type="text" name="input_field" placeholder="Masukkan teks..." class="border border-gray-300 bg-white/30 rounded-lg px-6 py-2 lg:w-96 w-60  focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent">
-                        <button type="button" id="submitBtn" class="bg-blue-400/50 text-white px-4 py-2 rounded-lg hover:bg-blue-500">Submit</button>  
+                        <input type="text" name="input_field" placeholder="Masukkan teks..." class="border border-gray-300 bg-white/30 rounded-xl px-6 py-2 lg:w-96 w-60  focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent">
+                        <button type="button" id="submitBtn" class="bg-blue-600/20 text-white px-4 py-2 ml-3 rounded-xl hover:bg-blue-700">Submit</button>  
                     </form>
                 </div>
             </div>
@@ -34,9 +33,7 @@
         </div>
     </div>
 </section>
-<!-- End -->
 
-<!-- Modal -->
 <div id="resultModal" class="hidden fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center backdrop-blur-sm z-50">
     <div class="bg-white/80 p-8 rounded-lg shadow-xl text-center max-w-lg w-full">
         <p class="text-black text-lg font-semibold">Berdasarkan hasil analisis diperoleh bahwa kamu:</p>
