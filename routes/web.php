@@ -22,4 +22,6 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/profile', [ProfileController::class, 'showprofileForm'])->name('profile');
 
+    Route::put('/change-password', [AuthController::class, 'update'])->name('password.update');
+
 });

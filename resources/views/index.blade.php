@@ -38,7 +38,7 @@
 
 <!-- Modal -->
 <div id="resultModal" class="hidden fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center backdrop-blur-sm z-50">
-    <div class="bg-white p-8 rounded-lg shadow-xl text-center max-w-lg w-full">
+    <div class="bg-white/80 p-8 rounded-lg shadow-xl text-center max-w-lg w-full">
         <p class="text-black text-lg font-semibold">Berdasarkan hasil analisis diperoleh bahwa kamu:</p>
         <h2 class="text-red-500 text-4xl font-bold mt-2">80%</h2>
         <p class=" text-red-500">Depresi</p>
