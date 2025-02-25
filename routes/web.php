@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('index');
 
     Route::get('/profile', [ProfileController::class, 'showprofileForm'])->name('profile');
+    Route::get('/profile/pdf/{id}', [ProfileController::class, 'exportToPDF'])->name('exportpdf');
 
     Route::put('/change-password', [AuthController::class, 'update'])->name('password.update');
 
