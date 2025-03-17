@@ -25,4 +25,7 @@ Route::middleware('auth')->group(function () {
 
     Route::put('/change-password', [AuthController::class, 'update'])->name('password.update');
 
+    // Route::post('/getUserId', [HomeController::class, 'getUserId'])->name('getUserId');
+    Route::post('/getTweetUser', [HomeController::class, 'getTweetUser'])->name('getTweetUser');
+
 });

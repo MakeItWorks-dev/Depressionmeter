@@ -15,10 +15,10 @@
                 <p class="text-lg max-w-xl">Silahkan masukan text pada kolom input dibawah ini untuk melakukan analisa apakah termasuk ke dalam orang dengan potensi depresi atau gangguan mental atau tidak.</p>
                 
                 <div class="mt-6 flex items-center space-x-2">
-                    <form action="">
+                    <form action="{{ route('getTweetUser') }}" method="POST">
                         @csrf
-                        <input type="text" name="input_field" placeholder="Masukkan teks..." class="border border-gray-300 bg-white/30 rounded-xl px-6 py-2 lg:w-96 w-60  focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent">
-                        <button type="button" id="submitBtn" class="bg-blue-600/20 text-white px-4 py-2 ml-3 rounded-xl hover:bg-blue-700">Submit</button>  
+                        <input type="text" name="username" placeholder="Masukkan teks..." class="border border-gray-300 bg-white/30 rounded-xl px-6 py-2 lg:w-96 w-60  focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent">
+                        <button type="submit" class="bg-blue-600/20 text-white px-4 py-2 ml-3 rounded-xl hover:bg-blue-700">Submit</button>  
                     </form>
                 </div>
             </div>
