@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
 {
@@ -11,11 +12,11 @@ class HomeController extends Controller
         return view('index');  
     }
 
-    public static function getUserId($username)
+    public function getUserId($username)
     {
         $curl = curl_init();
 
-        $bearerToken = 'AAAAAAAAAAAAAAAAAAAAAJJkzwEAAAAANYemPaEE6qz4g13HXdlqU8yZLaY%3DUPcAkCc5z4hUbEjFO3dzDjaCe9GIlhE1G3ciKfmzd7fI4cSFZ4';
+        $bearerToken = env('TWITTER_BEARER_TOKEN');
 
         curl_setopt_array($curl, [
             CURLOPT_URL => "https://api.twitter.com/2/users/by/username/$username",
@@ -35,9 +36,6 @@ class HomeController extends Controller
 
         $data = json_decode($response, true);
 
-        // return $response;
-
-        // Cek apakah respons mengandung 'data'
         if (isset($data['data']['id'])) {
             return $data['data']['id'];
         } else {
@@ -45,13 +43,12 @@ class HomeController extends Controller
         }
     }
 
-
-    public static function getTweetUser(Request $request)
+    public function getTweetUser(Request $request)
     {
         $username = $request->username;
-        $bearerToken = 'AAAAAAAAAAAAAAAAAAAAAJJkzwEAAAAANYemPaEE6qz4g13HXdlqU8yZLaY%3DUPcAkCc5z4hUbEjFO3dzDjaCe9GIlhE1G3ciKfmzd7fI4cSFZ4';
+        $bearerToken = env('TWITTER_BEARER_TOKEN');
 
-        $id = self::getUserId($username);
+        $id = $this->getUserId($username);
         if (!$id) {
             die("Error: User ID tidak ditemukan.");
         }
@@ -81,12 +78,42 @@ class HomeController extends Controller
 
         $data = json_decode($response, true);
         if (isset($data['data'])) {
-            return $data['data'];
+            $texts = array_map(function ($item) {
+                return $item['text'];
+            }, $data['data']);
+
+            $prediksi = $this->prediksiDepresi($texts, 'twitter');
         } else {
             die("Error: Tidak ada tweet ditemukan. Response: " . json_encode($data));
         }
     }
 
+    public function prediksiDepresi($data, $type)
+    {
+        if ($type == 'twitter') {
+            $url = 'http://localhost:8000/predict-array/';
+            $param = 'texts';
+        } else if ($type == 'text') {
+            $url = 'http://localhost:8000/predict-text/';
+            $param = 'text';
+        } else if ($type == 'file') {
+            $url = 'http://localhost:8000/predict-file/';
+            $param = 'file';
+        } else {
+            return response()->json(['error' => 'Tipe tidak valid'], 400);
+        }
 
+        $response = Http::post($url, [
+            $param => $data,
+        ]);
 
+        return $response;
+
+        // if ($response->successful()) {
+        //     $hasil = $response->json();
+        //     return $hasil;
+        // } else {
+        //     return response()->json(['error' => 'Gagal memanggil API prediksi'], 500);
+        // }
+    }
 }
