@@ -24,14 +24,7 @@ class ProfileController extends Controller
         $history = [];
 
         for ($i = 1; $i <= 5; $i++) {
-            $history[] = [
-                'no' => $i,
-                'tanggal' => '2 Februari 2025',
-                'hasil' => '80% Depresi',
-                'positif' => 80,
-                'negatif' => 10,
-                'netral' => 10,
-            ];
+            $history = $user->histories()->orderBy('created_at', 'desc')->get();
         }
 
         $pdf = PDF::loadView('pdf.profile', compact('user', 'history'));

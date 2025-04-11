@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DepressionMeter - History {{ $user->name }} </title>
-    <link href="{{ asset('assets/images/a.png') }}" rel="shortcut icon">
 
     <style>
         body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
@@ -41,7 +40,6 @@
         }
 
 
-        /* Atur margin halaman PDF agar footer muncul di setiap halaman */
         @page {
             margin: 20px;
         }
@@ -71,7 +69,8 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Tanggal Hasil</th>
+                        <th>Waktu Analisis</th>
+                        <th>Username</th>
                         <th>Hasil</th>
                         <th>Positif</th>
                         <th>Negatif</th>
@@ -81,12 +80,13 @@
                 <tbody>
                     @foreach ($history as $data)
                     <tr>
-                        <td>{{ $data['no'] }}</td>
-                        <td>{{ $data['tanggal'] }}</td>
-                        <td>{{ $data['hasil'] }}</td>
-                        <td>{{ $data['positif'] }}</td>
-                        <td>{{ $data['negatif'] }}</td>
-                        <td>{{ $data['netral'] }}</td>
+                        <td>{{ $loop->index+1 }}</td>
+                        <td>{{ $data['tanggal_prediksi'] }}</td>
+                        <td>{{ $data['username'] }}</td>
+                        <td>{{ $data['persentase_depresi'] }}</td>
+                        <td>{{ $data['qty_positif'] }}</td>
+                        <td>{{ $data['qty_negatif'] }}</td>
+                        <td>{{ $data['qty_netral'] }}</td>
                     </tr>
                     @endforeach
                 </tbody>
