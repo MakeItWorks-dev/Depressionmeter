@@ -123,4 +123,17 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Twitter Bearer Tokens
+    |--------------------------------------------------------------------------
+    */
+    'bearerToken' => [
+        'AAAAAAAAAAAAAAAAAAAAAJJkzwEAAAAA2bOpsTn%2Bs2VatpEaNUDvv7ypKOM%3DrqaJAYETVlml9coVQsi0FreNNpSEF6gdCrv7FJWACTdqCdQPZg',
+        'AAAAAAAAAAAAAAAAAAAAAJug0QEAAAAAVd%2FS2olqAOuXgkSmw2bOM%2B%2FXAJk%3DTqWO0Rt43EhThmPr1Gm7jQCmnRaXP3cjJ2JJuKocER4LcK9gyy',
+        'AAAAAAAAAAAAAAAAAAAAAHP8zwEAAAAAtqlexwTUAVB8DkABw%2FbS9T%2FvfxI%3DW9kRcRRVrS8cv4MmNZody5nyc2XsvpXobbJXOREZFPnTRPyXeY',
+        'AAAAAAAAAAAAAAAAAAAAAAW1wgEAAAAAqbBmS1Gp5ifwVeYKoxB7Ec8pt6g%3DI7RkvjFYfFudVwoxyzHACmbKhFXLQQOMPvulcQlWz86N18whGz',
+        'AAAAAAAAAAAAAAAAAAAAAGnU0QEAAAAA4twhwtgj6QkTM5IIPIa9baW8aC4%3D218dqHUQjSuE65xsyoDz7P0Pv1BPb5ZaWrQMY3NkF2ZnQSmHay',
+    ],
+
 ];

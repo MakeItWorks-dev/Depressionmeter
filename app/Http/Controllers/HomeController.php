@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\History;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -39,7 +40,11 @@ class HomeController extends Controller
         if (isset($data['data']['id'])) {
             return $data['data']['id'];
         } else {
-            die("Error: Tidak dapat menemukan user ID. Response: " . json_encode($data));
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Username tidak ditemukan!',
+                'data' => null,
+            ]);
         }
     }
 
@@ -50,7 +55,11 @@ class HomeController extends Controller
 
         $id = $this->getUserId($username);
         if (!$id) {
-            die("Error: User ID tidak ditemukan.");
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Username tidak ditemukan!',
+                'data' => null,
+            ]);
         }
 
         $curl = curl_init();
@@ -58,11 +67,6 @@ class HomeController extends Controller
         curl_setopt_array($curl, [
             CURLOPT_URL => "https://api.twitter.com/2/users/$id/tweets",
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => [
                 "Authorization: Bearer $bearerToken"
             ],
@@ -82,38 +86,58 @@ class HomeController extends Controller
                 return $item['text'];
             }, $data['data']);
 
-            $prediksi = $this->prediksiDepresi($texts, 'twitter');
+            $prediksi = Http::post('https://makeitworks-depressionmeters-api.hf.space/predict-array/', [
+                'texts' => $texts,
+            ]);
+
+            // return response()->json([
+            //     'tweets' => $data['data'],
+            //     'prediksi' => $prediksi->json(),
+            // ]);
+
+            if ($prediksi->successful()) {
+                $hasil = $prediksi->json();
+
+                $qty_positif = 0;
+                $qty_negatif = 0;
+                $qty_netral = 0;
+                
+                foreach ($hasil['results'] as $prediction) {
+                    if ($prediction['label'] === 'Positif') {
+                        $qty_positif++;
+                    } elseif ($prediction['label'] === 'Negatif (Depresi)') {
+                        $qty_negatif++;
+                    } else {
+                        $qty_netral++;
+                    }
+                }
+                $persentase_depresi = (int) str_replace('%', '', $hasil['persentase_depresi']);
+
+                $history = History::create([
+                    'user_id' => auth()->user()->id,
+                    'username' => $username,
+                    'persentase_depresi' => $persentase_depresi,
+                    'qty_positif' => $qty_positif,
+                    'qty_negatif' => $qty_negatif,
+                    'qty_netral' => $qty_netral,
+                ]);
+
+                // convert history to json and return
+                return response()->json([
+                    'status' => 'success',
+                    'tweets' => $data['data'],
+                    'prediksi' => $hasil,
+                    'history' => $history,
+                ]);
+            } else {
+                return response()->json(['error' => 'Gagal memanggil API prediksi'], 500);
+            }
         } else {
-            die("Error: Tidak ada tweet ditemukan. Response: " . json_encode($data));
+            return response()->json([
+                'status' => 'error',
+                'message' => 'API mencapai batas maksimum. Mohon coba lagi dalam 10 - 15 menit!',
+                'data' => null,
+            ]);
         }
-    }
-
-    public function prediksiDepresi($data, $type)
-    {
-        if ($type == 'twitter') {
-            $url = 'http://localhost:8000/predict-array/';
-            $param = 'texts';
-        } else if ($type == 'text') {
-            $url = 'http://localhost:8000/predict-text/';
-            $param = 'text';
-        } else if ($type == 'file') {
-            $url = 'http://localhost:8000/predict-file/';
-            $param = 'file';
-        } else {
-            return response()->json(['error' => 'Tipe tidak valid'], 400);
-        }
-
-        $response = Http::post($url, [
-            $param => $data,
-        ]);
-
-        return $response;
-
-        // if ($response->successful()) {
-        //     $hasil = $response->json();
-        //     return $hasil;
-        // } else {
-        //     return response()->json(['error' => 'Gagal memanggil API prediksi'], 500);
-        // }
     }
 }

@@ -17,8 +17,8 @@
                 <div class="mt-6 flex items-center space-x-2">
                     <form action="{{ route('getTweetUser') }}" method="POST">
                         @csrf
-                        <input type="text" name="username" placeholder="Masukkan teks..." class="border border-gray-300 bg-white/30 rounded-xl px-6 py-2 lg:w-96 w-60  focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent">
-                        <button type="submit" class="bg-blue-600/20 text-white px-4 py-2 ml-3 rounded-xl hover:bg-blue-700">Submit</button>  
+                        <input type="text" name="username" id="usernameTwitter" placeholder="Masukkan Username Twitter / X" class="border border-gray-300 bg-white/30 rounded-xl px-6 py-2 lg:w-96 w-60  focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent">
+                        <button type="button" id="submitBtn" class="bg-blue-600/20 text-white px-4 py-2 ml-3 rounded-xl hover:bg-blue-700">Submit</button>  
                     </form>
                 </div>
             </div>
@@ -37,20 +37,20 @@
 <div id="resultModal" class="hidden fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center backdrop-blur-sm z-50">
     <div class="bg-white/80 p-8 rounded-lg shadow-xl text-center max-w-lg w-full">
         <p class="text-black text-lg font-semibold">Berdasarkan hasil analisis diperoleh bahwa kamu:</p>
-        <h2 class="text-red-500 text-4xl font-bold mt-2">80%</h2>
+        <h2 class="text-red-500 text-4xl font-bold mt-2" id="persentaseDepresi"></h2>
         <p class=" text-red-500">Depresi</p>
-        <p class="text-black mt-4">Berikut merupakan analisa detail mengenai text yang sudah kamu submit</p>
+        <p class="text-black mt-4">Berikut merupakan analisa detail mengenai username Twitter atau X yang sudah kamu submit</p>
         <div class="flex justify-center space-x-4 mt-4">
             <div class="bg-red-100 text-red-500 p-6 rounded-lg">
-                <p class="text-2xl font-bold">30</p>
-                <p class="">Sentimen Negatif</p>
+                <p class="text-2xl font-bold" id="qtyNegatif"></p>
+                <p class="">Sentimen Negatif (Depresi)</p>
             </div>
-            <div class="bg-blue-100 text-blue-500 p-6 rounded-lg">
-                <p class="text-2xl font-bold">12</p>
-                <p class="">Sentimen Positif</p>
+            <div class="bg-green-100 text-green-500 p-6 rounded-lg">
+                <p class="text-2xl font-bold" id="qtyPositif"></p>
+                <p class="">Sentimen Positif (Tidak Depresi)</p>
             </div>
-            <div class="bg-gray-100 text-gray-700 p-6 rounded-lg">
-                <p class="text-2xl font-bold">2</p>
+            <div class="bg-blue-100 text-blue-700 p-6 rounded-lg">
+                <p class="text-2xl font-bold" id="qtyNetral"></p>
                 <p class="">Sentimen Netral</p>
             </div>
         </div>
@@ -61,10 +61,60 @@
 
 <script>
     document.getElementById('submitBtn').addEventListener('click', function() {
-        document.getElementById('resultModal').classList.remove('hidden');
+        let username = $('#usernameTwitter').val();
+
+        if (username == '') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Mohon masukkan username Twitter / X',
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
+            });
+            return;
+        } else {
+            $.ajax({
+                url: "{{ route('getTweetUser') }}",
+                type: "POST",
+                data: {
+                    username: $('#usernameTwitter').val(),
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    if (response.status == 'error') {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: response.message,
+                        });
+                        return;
+                    } else if (response.status == 'success') {
+                        let value = response.history;
+        
+                        $('#persentaseDepresi').text(value.persentase_depresi + '%');
+                        $('#qtyNegatif').text(value.qty_negatif);
+                        $('#qtyPositif').text(value.qty_positif);
+                        $('#qtyNetral').text(value.qty_netral);
+        
+                        $('#resultModal').removeClass('hidden');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: error,
+                    });
+                }
+            });
+        }
+
     });
+
     document.getElementById('closeModal').addEventListener('click', function() {
-        document.getElementById('resultModal').classList.add('hidden');
+        $('#resultModal').addClass('hidden');
     });
 </script>
 
