@@ -86,7 +86,7 @@ class HomeController extends Controller
                 return $item['text'];
             }, $data['data']);
 
-            $prediksi = Http::post('https://makeitworks-depressionmeters-api.hf.space/predict-array/', [
+            $prediksi = Http::post('https://APIFREEXYZ-depressionmeters-api.hf.space/predict-array/', [
                 'texts' => $texts,
             ]);
 
