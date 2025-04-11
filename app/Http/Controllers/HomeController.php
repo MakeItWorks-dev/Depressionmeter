@@ -90,11 +90,6 @@ class HomeController extends Controller
                 'texts' => $texts,
             ]);
 
-            // return response()->json([
-            //     'tweets' => $data['data'],
-            //     'prediksi' => $prediksi->json(),
-            // ]);
-
             if ($prediksi->successful()) {
                 $hasil = $prediksi->json();
 
@@ -122,7 +117,6 @@ class HomeController extends Controller
                     'qty_netral' => $qty_netral,
                 ]);
 
-                // convert history to json and return
                 return response()->json([
                     'status' => 'success',
                     'tweets' => $data['data'],

@@ -14,7 +14,8 @@ class ProfileController extends Controller
     public function showprofileForm()
     {
         $user = Auth::user();
-        return view('profile', compact('user'));
+        $history = $user->histories()->orderBy('created_at', 'desc')->get();
+        return view('profile', compact('user', 'history'));
     }
 
     public function exportToPDF($id)

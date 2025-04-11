@@ -89,7 +89,8 @@
                             <thead>
                                 <tr class="border-white text-white uppercase text-sm leading-normal">
                                     <th class="py-3 px-6 text-center font-bold border-b border-white">No</th>
-                                    <th class="py-3 px-6 text-center font-bold border-l border-white">Tanggal Hasil</th>
+                                    <th class="py-3 px-6 text-center font-bold border-l border-white">Waktu Analisis</th>
+                                    <th class="py-3 px-6 text-center font-bold border-l border-white">Username</th>
                                     <th class="py-3 px-6 text-center font-bold border-l border-white">Hasil</th>
                                     <th class="py-3 px-6 text-center font-bold border-l border-white">Positif</th>
                                     <th class="py-3 px-6 text-center font-bold border-l border-white">Negatif</th>
@@ -98,7 +99,7 @@
                             </thead>
                         
                             @php
-                                $totalData = 5;
+                                $totalData = count($history);
                                 $perPage = 10;
                                 $totalPages = ceil($totalData / $perPage);
                             @endphp
@@ -108,11 +109,12 @@
                                     @for ($i = $page * $perPage + 1; $i <= min(($page + 1) * $perPage, $totalData); $i++)
                                         <tr class="hover:bg-gray-700">
                                             <td class="py-3 px-6 border-b border-white">{{ $i }}</td>
-                                            <td class="py-3 px-6 border border-white">2 Februari 2025</td>
-                                            <td class="py-3 px-6 border border-white">80% Depresi</td>
-                                            <td class="py-3 px-6 border border-white">80</td>
-                                            <td class="py-3 px-6 border border-white">10</td>
-                                            <td class="py-3 px-6 border-b border-white">10</td>
+                                            <td class="py-3 px-6 border border-white">{{ $history[$i - 1]->tanggal_prediksi }}</td>
+                                            <td class="py-3 px-6 border border-white">{{ $history[$i - 1]->username }}</td>
+                                            <td class="py-3 px-6 border border-white">{{ $history[$i - 1]->persentase_depresi }} %</td>
+                                            <td class="py-3 px-6 border border-white">{{ $history[$i - 1]->qty_positif }}</td>
+                                            <td class="py-3 px-6 border border-white">{{ $history[$i - 1]->qty_negatif }}</td>
+                                            <td class="py-3 px-6 border-b ">{{ $history[$i - 1]->qty_netral }}</td>
                                         </tr>
                                     @endfor
                                 </tbody>
