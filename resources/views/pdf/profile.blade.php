@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ asset('assets/images/a.png') }}" rel="shortcut icon">
     <title>DepressionMeter - History {{ $user->name }} </title>
 
     <style>
@@ -96,7 +97,7 @@
 
     <!-- Footer di setiap halaman -->
     <div class="footer">
-        Generated on {{ now()->format('F j, Y') }} | DepressionMeter Report
+        Generated on {{ now()->format('F j, Y') }} | Depression Meter Report
     </div>
 </body>
 </html>

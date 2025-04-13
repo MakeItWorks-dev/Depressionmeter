@@ -6,7 +6,7 @@
 
             <div class="md:col-span-6 md:mt-0 mt-8">
                 <div class="text-center">
-                    <p class="text-gray-400">© <script>document.write(new Date().getFullYear())</script> DepressionMeter</p>
+                    <p class="text-gray-400">© <script>document.write(new Date().getFullYear())</script> Depression Meter</p>
                 </div>
             </div>
 

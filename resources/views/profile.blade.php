@@ -72,17 +72,15 @@
                         </button>
                     </form>
                 </div>
-               
             </div>
     
             <div class="col-span-12 md:col-span-9">
                 <div class="p-6 rounded-lg bg-gray-700/50">
                     <div class="flex justify-between -mt-2 space-x-2">
                         <h2 class="text-4xl font-extrabold text-white mb-4">Riwayat Analisa</h2>
-                        <a href="{{ route('exportpdf', ['id' => $user->id]) }}" 
-                            class="size-10 flex items-center justify-center rounded-xl bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white">
-                             <i data-feather="file-text" class="size-4"></i>
-                         </a>
+                        <a href="{{ route('exportpdf', ['id' => $user->id]) }}" target="_blank" class="size-10 flex items-center justify-center rounded-xl bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white">
+                            <i data-feather="file-text" class="size-4"></i>
+                        </a>
                     </div>
                     <div class="overflow-x-auto">
                         <table class="min-w-full rounded-lg border-collapse">
