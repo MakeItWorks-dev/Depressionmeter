@@ -1,4 +1,4 @@
-<nav class="navbar rounded-b-xl" id="navbar">
+<nav class="navbar" id="navbar">
     <div class="container relative flex flex-wrap items-center justify-between">
         <div class="nav-icons flex items-center lg_992:order-2 md:ms-6">
             <ul class="list-none menu-social mb-0 flex items-center space-x-3">
