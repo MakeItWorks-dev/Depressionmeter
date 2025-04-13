@@ -126,7 +126,7 @@ class HomeController extends Controller
         } elseif (isset($data['errors'])) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Username tidak ditemukan!',
+                'message' => 'Akun tersebut bersifat private atau tidak ditemukan!',
                 'data' => null,
             ]);
         } else {
