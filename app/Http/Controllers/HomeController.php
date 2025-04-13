@@ -22,26 +22,28 @@ class HomeController extends Controller
             curl_setopt_array($curl, [
                 CURLOPT_URL => $url,
                 CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_HEADER => true, 
                 CURLOPT_HTTPHEADER => [
                     "Authorization: Bearer $token"
                 ],
             ]);
 
             $response = curl_exec($curl);
-            $err = curl_error($curl);
+            $header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
+            $header = substr($response, 0, $header_size);
+            $body = substr($response, $header_size);
+            $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
             curl_close($curl);
 
-            if (!$err) {
-                return json_decode($response, true);
+            if ($http_code === 200) {
+                return json_decode($body, true);
             }
         }
 
-        return response()->json([
-            'status' => 'error',
-            'message' => 'API mencapai batas maksimum. Mohon coba lagi dalam 10 - 15 menit!',
-            'data' => null,
-        ]);
+        return null; 
     }
+
 
     public function getUserId($username)
     {
@@ -125,7 +127,7 @@ class HomeController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'API mencapai batas maksimum. Mohon coba lagi dalam 10 - 15 menit!',
-                'data' => null,
+                'data' => $data,
             ]);
         }
     }
