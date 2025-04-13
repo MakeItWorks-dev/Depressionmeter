@@ -74,6 +74,15 @@
             });
             return;
         } else {
+            Swal.fire({
+                title: 'Mohon tunggu...',
+                text: 'Akun ' + username + ' sedang kami analis!',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
             $.ajax({
                 url: "{{ route('getTweetUser') }}",
                 type: "POST",
@@ -82,6 +91,8 @@
                     _token: '{{ csrf_token() }}'
                 },
                 success: function(response) {
+                    Swal.close(); 
+
                     if (response.status == 'error') {
                         Swal.fire({
                             icon: 'error',
@@ -101,6 +112,7 @@
                     }
                 },
                 error: function(xhr, status, error) {
+                    Swal.close();  
                     console.error(xhr);
                     Swal.fire({
                         icon: 'error',
@@ -116,6 +128,7 @@
     document.getElementById('closeModal').addEventListener('click', function() {
         $('#resultModal').addClass('hidden');
     });
+
 </script>
 
 @endsection
