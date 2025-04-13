@@ -7,10 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Depression Meter</title>
         <meta name="description" content="Depression meter is a web application that helps to detect early signs of depression through social media post analysis.">
-        <meta name="keywords" content="Onepage, creative, modern, Tailwind CSS, multipurpose, clean">
-        <meta name="author" content="Shreethemes">
-        <meta name="website" content="https://shreethemes.in">
-        <meta name="email" content="support@shreethemes.in">
+        <meta name="keywords" content="Depression, Meter, Social Media, Analysis, Early Detection">
         <meta name="version" content="1..0">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <link href="{{ asset('assets/images/a.png') }}" rel="shortcut icon">
