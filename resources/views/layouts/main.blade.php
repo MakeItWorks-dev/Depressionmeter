@@ -6,7 +6,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Depression Meter</title>
-        <meta name="description" content="Responsive Tailwind CSS Template">
+        <meta name="description" content="Depression meter is a web application that helps to detect early signs of depression through social media post analysis.">
         <meta name="keywords" content="Onepage, creative, modern, Tailwind CSS, multipurpose, clean">
         <meta name="author" content="Shreethemes">
         <meta name="website" content="https://shreethemes.in">
