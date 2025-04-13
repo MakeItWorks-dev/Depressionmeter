@@ -128,7 +128,7 @@ return [
     | Twitter Bearer Tokens
     |--------------------------------------------------------------------------
     */
-    'bearerToken' => [
+    'twitter_bearer_tokens' => [
         'AAAAAAAAAAAAAAAAAAAAAJJkzwEAAAAA2bOpsTn%2Bs2VatpEaNUDvv7ypKOM%3DrqaJAYETVlml9coVQsi0FreNNpSEF6gdCrv7FJWACTdqCdQPZg',
         'AAAAAAAAAAAAAAAAAAAAAJug0QEAAAAAVd%2FS2olqAOuXgkSmw2bOM%2B%2FXAJk%3DTqWO0Rt43EhThmPr1Gm7jQCmnRaXP3cjJ2JJuKocER4LcK9gyy',
         'AAAAAAAAAAAAAAAAAAAAAHP8zwEAAAAAtqlexwTUAVB8DkABw%2FbS9T%2FvfxI%3DW9kRcRRVrS8cv4MmNZody5nyc2XsvpXobbJXOREZFPnTRPyXeY',

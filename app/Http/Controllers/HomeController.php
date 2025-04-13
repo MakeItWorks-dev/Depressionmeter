@@ -13,29 +13,40 @@ class HomeController extends Controller
         return view('index');  
     }
 
-    public function getUserId($username)
+    public function callTwitterApiWithFallback($url)
     {
-        $curl = curl_init();
+        $tokens = config('app.twitter_bearer_tokens');
+        foreach ($tokens as $token) {
+            $curl = curl_init();
 
-        $bearerToken = env('TWITTER_BEARER_TOKEN');
+            curl_setopt_array($curl, [
+                CURLOPT_URL => $url,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_HTTPHEADER => [
+                    "Authorization: Bearer $token"
+                ],
+            ]);
 
-        curl_setopt_array($curl, [
-            CURLOPT_URL => "https://api.twitter.com/2/users/by/username/$username",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_HTTPHEADER => [
-                "Authorization: Bearer $bearerToken"
-            ],
-        ]);
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
+            curl_close($curl);
 
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
-        curl_close($curl);
-
-        if ($err) {
-            die("cURL Error: " . $err);
+            if (!$err) {
+                return json_decode($response, true);
+            }
         }
 
-        $data = json_decode($response, true);
+        return response()->json([
+            'status' => 'error',
+            'message' => 'API mencapai batas maksimum. Mohon coba lagi dalam 10 - 15 menit!',
+            'data' => null,
+        ]);
+    }
+
+    public function getUserId($username)
+    {
+        $url = "https://api.twitter.com/2/users/by/username/$username";
+        $data = $this->callTwitterApiWithFallback($url);
 
         if (isset($data['data']['id'])) {
             return $data['data']['id'];
@@ -62,25 +73,9 @@ class HomeController extends Controller
             ]);
         }
 
-        $curl = curl_init();
+        $url = "https://api.twitter.com/2/users/$id/tweets";
+        $data = $this->callTwitterApiWithFallback($url);
 
-        curl_setopt_array($curl, [
-            CURLOPT_URL => "https://api.twitter.com/2/users/$id/tweets",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_HTTPHEADER => [
-                "Authorization: Bearer $bearerToken"
-            ],
-        ]);
-
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
-        curl_close($curl);
-
-        if ($err) {
-            die("cURL Error: " . $err);
-        }
-
-        $data = json_decode($response, true);
         if (isset($data['data'])) {
             $texts = array_map(function ($item) {
                 return $item['text'];
