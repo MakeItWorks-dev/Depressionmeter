@@ -12,6 +12,9 @@ Route::get('/', function () {
     return view('login');
 })->name('home');
 
+Route::get('/login', function () {
+    return view('login');
+})->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
