@@ -123,6 +123,12 @@ class HomeController extends Controller
             } else {
                 return response()->json(['error' => 'Gagal memanggil API prediksi'], 500);
             }
+        } elseif (isset($data['errors'])) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Username tidak ditemukan!',
+                'data' => null,
+            ]);
         } else {
             return response()->json([
                 'status' => 'error',
